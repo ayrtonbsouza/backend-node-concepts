@@ -1,17 +1,60 @@
-// 1 - Importação do Express dentro de uma Constante chamada "express";
 const express = require('express');
 
-// 2 - Declara uma constante app que carregará uma instância do Express;
 const app = express();
 
-// 4 - Declaração de recursos da API
-app.get('/hello-world', (request, response) =>{
-  return response.json({
-    message: "Hello, world!"
-  })
+/**
+ * Métodos HTTP:
+ * 
+ * GET: Buscar informaç±oes do Banco de Dados
+ * POST: Criar informações no Banco de Dados
+ * PUT: Alterar um conjunto de informações no Banco de Dados
+ * PATCH: Alterar uma informação em específico no Banco de Dados
+ * DELETE: Deletar uma informação do banco de dados
+ * 
+ */
+
+app.get('/projetos', (request, response) =>{
+  return response.json([
+    'Projeto 1',
+    'Projeto 2',
+    'Projeto 3',
+    'Projeto 4',
+    'Projeto 5',
+  ])
+});
+
+app.post('/projetos', (request, response) => {
+  return response.json([
+    'Projeto 1',
+    'Projeto 2',
+    'Projeto 3',
+    'Projeto 4',
+    'Projeto 5',
+    'Projeto 6',
+  ])
 })
 
-// 3 - Cria um listener para ser possível acessar a API por um navegador, por exemplo;
+app.put('/projetos/:id', (request, response) => {
+  return response.json([
+    'Projeto 0',
+    'Projeto 2',
+    'Projeto 3',
+    'Projeto 4',
+    'Projeto 5',
+    'Projeto 6',
+  ])
+})
+
+app.delete('/projetos/:id', (request, response) => {
+  return response.json([
+    'Projeto 0',
+    'Projeto 2',
+    'Projeto 3',
+    'Projeto 4',
+    'Projeto 5',
+  ])
+})
+
 app.listen(3333, () => {
   console.log("🚀 Server started and running on http://localhost:3333")
 });
