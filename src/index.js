@@ -13,46 +13,77 @@ const app = express();
  * 
  */
 
-app.get('/projetos', (request, response) =>{
-  return response.json([
-    'Projeto 1',
-    'Projeto 2',
-    'Projeto 3',
-    'Projeto 4',
-    'Projeto 5',
+app.use(express.json())
+
+app.get('/projetos', (request, response) => {
+  return response.json([{
+      id: "5df3eecd4f2c0a006b466f32",
+      name: "alpha",
+      status: "active",
+      owner: "5da5d38795ffb700729fc0e4",
+      createdAt: "2020-11-06T15:40:00.000Z",
+      updatedAt: "2020-11-06T15:40:00.000Z",
+    },
+    {
+      id: "5df3eecd4f2c0a006b466f32",
+      name: "vldmrt",
+      status: "done",
+      owner: "5da5d38795ffb700729fc0e4",
+      createdAt: "2020-11-06T15:40:00.000Z",
+      updatedAt: "2020-11-06T15:40:00.000Z",
+    },
+    {
+      id: "5df3eecd4f2c0a006b466f32",
+      name: "gama",
+      status: "future",
+      owner: "5da5d38795ffb700729fc0e4",
+      createdAt: "2020-11-06T15:40:00.000Z",
+      updatedAt: "2020-11-06T15:40:00.000Z",
+    },
   ])
 });
 
 app.post('/projetos', (request, response) => {
-  return response.json([
-    'Projeto 1',
-    'Projeto 2',
-    'Projeto 3',
-    'Projeto 4',
-    'Projeto 5',
-    'Projeto 6',
-  ])
+  const {
+    name,
+    status,
+    owner,
+    createdAt,
+    updatedAt
+  } = request.body;
+  const id = "5df3eecd4f2c0a006b466f32";
+  return response.json({
+    id,
+    name,
+    status,
+    owner,
+    createdAt,
+    updatedAt
+  })
 })
 
 app.put('/projetos/:id', (request, response) => {
-  return response.json([
-    'Projeto 0',
-    'Projeto 2',
-    'Projeto 3',
-    'Projeto 4',
-    'Projeto 5',
-    'Projeto 6',
-  ])
+  const id = request.params.id;
+  return response.json({
+    id,
+    name: "Delta",
+    status: "active",
+    owner: "5da5d38795ffb700729fc0e4",
+    createdAt: "2020-11-06T15:40:00.000Z",
+    updatedAt: "2020-11-06T15:40:00.000Z"
+  })
 })
 
 app.delete('/projetos/:id', (request, response) => {
-  return response.json([
-    'Projeto 0',
-    'Projeto 2',
-    'Projeto 3',
-    'Projeto 4',
-    'Projeto 5',
-  ])
+  const id = request.params.id;
+  return response.json({
+    id,
+    name: "Delta",
+    status: "deleted",
+    owner: "5da5d38795ffb700729fc0e4",
+    createdAt: "2020-11-06T15:40:00.000Z",
+    updatedAt: "2020-11-06T15:40:00.000Z"
+  })
 })
 
 app.listen(3333, () => {
