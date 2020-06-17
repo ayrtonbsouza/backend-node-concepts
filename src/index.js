@@ -1,5 +1,5 @@
 const express = require('express');
-const { uuid } = require('uuidv4');
+const { uuid, isUuid } = require('uuidv4');
 
 const app = express();
 
@@ -22,11 +22,36 @@ const app = express();
   * Request Body: Conteúdo para POST ou PUT (JSON)
   */
 
+  /**
+   * Middleware:
+   * 
+   * Interceptador de Requisições que pode interromper total a requisição ou alterar dados da requisição
+   */
+
 app.use(express.json())
 
 const projetos = []
 
-app.get('/projetos', (request, response) => {
+function logRequests(request, response, next) {
+  const { method, url } = request;
+  const logLabel = `[${method.toUpperCase()}] ${url}`
+  console.time(logLabel);
+  next();
+  console.timeEnd(logLabel);
+}
+
+function validateProjectId(request, response, next)  {
+  const { id } = request.params;
+  if (!isUuid(id)) {
+    return response.status(400).json({ error: 'Invalid Project ID.' })
+  }
+  return next();
+}
+
+// app.use(logRequests)
+app.use('/projetos/:id', validateProjectId);
+
+app.get('/projetos', logRequests, (request, response) => {
   const { owner } = request.query;
   const resultados = owner ? projetos.filter( projeto => projeto.owner.includes(owner) ) : projetos;
   return response.json(resultados);
