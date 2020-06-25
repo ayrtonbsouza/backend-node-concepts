@@ -17,10 +17,10 @@ To clone and run this application, you will need [Git](https://git-scm.com/), [N
 You will need to run the following commands on your terminal:
 
     # Clone this repository
-    $ git clone https://github.com/ayrtonbsouza/gs-node-concepts
+    $ git clone https://github.com/ayrtonbsouza/gs-backend-node-concepts-lesson
 
     # Go into the repository
-    $ cd gs-node-concepts
+    $ cd gs-backend-node-concepts-lesson
 
     # Install dependencies
     $ yarn install
